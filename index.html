@@ -128,13 +128,8 @@
 
   .portfolio-grid { display:grid;grid-template-columns:repeat(12,1fr);gap:1.2rem; }
   .portfolio-item { position:relative;overflow:hidden;cursor:pointer;text-decoration:none;display:block; }
-  /* Clean 3-column portfolio grid — all rows sum to 12 */
-  .portfolio-item:nth-child(1) { grid-column:span 5; }
-  .portfolio-item:nth-child(2) { grid-column:span 4; }
-  .portfolio-item:nth-child(3) { grid-column:span 3; }
-  .portfolio-item:nth-child(4) { grid-column:span 3; }
-  .portfolio-item:nth-child(5) { grid-column:span 4; }
-  .portfolio-item:nth-child(6) { grid-column:span 5; }
+  /* Equal 3-column portfolio grid */
+  .portfolio-item { grid-column:span 4; }
 
   .p-img { width:100%;aspect-ratio:4/5;transition:transform .6s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden; }
   .portfolio-item:hover .p-img { transform:scale(1.05); }
@@ -641,7 +636,7 @@
   <div class="about-grid">
     <div class="about-visual reveal">
       <div class="about-label">@THATROAMFLUENCER</div>
-      <div class="about-main"><img src="images/DTyCQUdiBkp.jpg" alt="Malaika Agrawal — @thatroamfluencer"></div>
+      <div class="about-main"><img src="images/DEcUNgrs_x0.jpg" alt="Malaika Agrawal — @thatroamfluencer"></div>
       <div class="about-float"><img src="images/DXjwFjGkuM3.jpg" alt="Udaipur" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;"></div>
     </div>
     <div class="about-text">
