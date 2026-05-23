@@ -139,13 +139,21 @@
   .portfolio-item:nth-child(1) .p-img { min-height:520px; }
   .portfolio-item:hover .p-img { transform:scale(1.05); }
 
-  /* Pink gradient placeholders */
-  .g1 { background:linear-gradient(145deg,#F5C5D5 0%,#E8A0B8 40%,#D4758F 100%); }
-  .g2 { background:linear-gradient(135deg,#F2B8C6 0%,#DDA0B5 50%,#C47890 100%); }
-  .g3 { background:linear-gradient(150deg,#FAD9E3 0%,#F0AABF 40%,#E08090 100%); }
-  .g4 { background:linear-gradient(140deg,#FADADD 0%,#F2B0C0 50%,#DE8898 100%); }
-  .g5 { background:linear-gradient(155deg,#F5C5D5 0%,#E895AB 40%,#D06880 100%); }
-  .g6 { background:linear-gradient(145deg,#FAD0DC 0%,#F0A0BC 50%,#DC7898 100%); }
+  /* Real image cards */
+  .p-img img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block; }
+
+  /* Instagram media cards */
+  .ig-card { position:relative;overflow:hidden;display:block;text-decoration:none;aspect-ratio:9/16; }
+  .ig-card.square { aspect-ratio:1/1; }
+  .ig-card img { width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94); }
+  .ig-card:hover img { transform:scale(1.05); }
+  .ig-card-overlay { position:absolute;inset:0;background:rgba(42,21,32,0);display:flex;align-items:center;justify-content:center;transition:background .4s; }
+  .ig-card:hover .ig-card-overlay { background:rgba(42,21,32,.45); }
+  .ig-card-icon { color:var(--white);font-size:2.2rem;opacity:0;transform:scale(.85);transition:opacity .3s,transform .3s; }
+  .ig-card:hover .ig-card-icon { opacity:1;transform:scale(1); }
+  .reels-grid-ig { display:grid;grid-template-columns:repeat(5,1fr);gap:1.2rem;margin-top:2.5rem; }
+  .photos-grid-ig { display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem; }
+  @media(max-width:900px){ .reels-grid-ig { grid-template-columns:1fr 1fr; } .photos-grid-ig { grid-template-columns:1fr 1fr; } }
 
   .p-img::after { content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(42,21,32,.7) 0%,transparent 55%); }
 
@@ -343,7 +351,7 @@
 
   <div class="portfolio-grid">
     <a href="https://www.instagram.com/reel/DXb9GwwCMHK/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img g1"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="p-img"><img src="images/DXb9GwwCMHK.jpg" alt="Solo Trip, Phuket"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Travel · Campaign</div>
         <div class="p-name">Solo Trip</div>
@@ -351,7 +359,7 @@
       </div>
     </a>
     <a href="https://www.instagram.com/reel/DUik8u2EsVK/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img g2"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="p-img"><img src="images/DUik8u2EsVK.jpg" alt="Green Valley Resort"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Hospitality</div>
         <div class="p-name">Green Valley Resort</div>
@@ -359,7 +367,7 @@
       </div>
     </a>
     <a href="https://www.instagram.com/reel/DTyCQUdiBkp/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img g3"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="p-img"><img src="images/DTyCQUdiBkp.jpg" alt="Beach Editorial"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Fashion</div>
         <div class="p-name">Beach Editorial</div>
@@ -367,7 +375,7 @@
       </div>
     </a>
     <a href="https://www.instagram.com/reel/DXg_hzRiGHO/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img g4"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="p-img"><img src="images/DXg_hzRiGHO.jpg" alt="BIG 4 Corporate Culture"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Lifestyle</div>
         <div class="p-name">The BIG 4 Corporate Culture</div>
@@ -375,7 +383,7 @@
       </div>
     </a>
     <a href="https://www.instagram.com/reel/DYZfgn9SixU/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img g5"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="p-img"><img src="images/DYZfgn9SixU.jpg" alt="Rice Terraces"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Travel</div>
         <div class="p-name">Rice Terraces</div>
@@ -383,7 +391,7 @@
       </div>
     </a>
     <a href="https://www.instagram.com/p/DXjwFjGkuM3/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img g6"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="p-img"><img src="images/DXjwFjGkuM3.jpg" alt="Royal Dream Restaurant"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Fashion · Hospitality</div>
         <div class="p-name">Royal Dream Restaurant</div>
@@ -396,47 +404,27 @@
   <div class="media-row">
     <div class="media-row-label reveal">Reels</div>
     <h3 class="media-row-title reveal">Watch Her <em>World</em></h3>
-    <div class="embeds-grid reveal">
-      <div class="embed-item">
-        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
-          data-instgrm-permalink="https://www.instagram.com/reel/DXb9GwwCMHK/"
-          data-instgrm-version="14"
-          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-          <a href="https://www.instagram.com/reel/DXb9GwwCMHK/" target="_blank" rel="noopener">View on Instagram</a>
-        </blockquote>
-      </div>
-      <div class="embed-item">
-        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
-          data-instgrm-permalink="https://www.instagram.com/reel/DUik8u2EsVK/"
-          data-instgrm-version="14"
-          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-          <a href="https://www.instagram.com/reel/DUik8u2EsVK/" target="_blank" rel="noopener">View on Instagram</a>
-        </blockquote>
-      </div>
-      <div class="embed-item">
-        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
-          data-instgrm-permalink="https://www.instagram.com/reel/DTyCQUdiBkp/"
-          data-instgrm-version="14"
-          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-          <a href="https://www.instagram.com/reel/DTyCQUdiBkp/" target="_blank" rel="noopener">View on Instagram</a>
-        </blockquote>
-      </div>
-      <div class="embed-item">
-        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
-          data-instgrm-permalink="https://www.instagram.com/reel/DXg_hzRiGHO/"
-          data-instgrm-version="14"
-          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-          <a href="https://www.instagram.com/reel/DXg_hzRiGHO/" target="_blank" rel="noopener">View on Instagram</a>
-        </blockquote>
-      </div>
-      <div class="embed-item">
-        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
-          data-instgrm-permalink="https://www.instagram.com/reel/DYZfgn9SixU/"
-          data-instgrm-version="14"
-          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-          <a href="https://www.instagram.com/reel/DYZfgn9SixU/" target="_blank" rel="noopener">View on Instagram</a>
-        </blockquote>
-      </div>
+    <div class="reels-grid-ig reveal">
+      <a href="https://www.instagram.com/reel/DXb9GwwCMHK/" target="_blank" rel="noopener" class="ig-card">
+        <img src="images/DXb9GwwCMHK.jpg" alt="Reel">
+        <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
+      </a>
+      <a href="https://www.instagram.com/reel/DUik8u2EsVK/" target="_blank" rel="noopener" class="ig-card">
+        <img src="images/DUik8u2EsVK.jpg" alt="Reel">
+        <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
+      </a>
+      <a href="https://www.instagram.com/reel/DTyCQUdiBkp/" target="_blank" rel="noopener" class="ig-card">
+        <img src="images/DTyCQUdiBkp.jpg" alt="Reel">
+        <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
+      </a>
+      <a href="https://www.instagram.com/reel/DXg_hzRiGHO/" target="_blank" rel="noopener" class="ig-card">
+        <img src="images/DXg_hzRiGHO.jpg" alt="Reel">
+        <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
+      </a>
+      <a href="https://www.instagram.com/reel/DYZfgn9SixU/" target="_blank" rel="noopener" class="ig-card">
+        <img src="images/DYZfgn9SixU.jpg" alt="Reel">
+        <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
+      </a>
     </div>
   </div>
 
@@ -444,31 +432,19 @@
   <div class="media-row">
     <div class="media-row-label reveal">Photos</div>
     <h3 class="media-row-title reveal">Still <em>Stories</em></h3>
-    <div class="embeds-grid-photos reveal">
-      <div class="embed-item">
-        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
-          data-instgrm-permalink="https://www.instagram.com/p/DXjwFjGkuM3/"
-          data-instgrm-version="14"
-          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-          <a href="https://www.instagram.com/p/DXjwFjGkuM3/" target="_blank" rel="noopener">View on Instagram</a>
-        </blockquote>
-      </div>
-      <div class="embed-item">
-        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
-          data-instgrm-permalink="https://www.instagram.com/p/DXRNI2hEf9Y/"
-          data-instgrm-version="14"
-          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-          <a href="https://www.instagram.com/p/DXRNI2hEf9Y/" target="_blank" rel="noopener">View on Instagram</a>
-        </blockquote>
-      </div>
-      <div class="embed-item">
-        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
-          data-instgrm-permalink="https://www.instagram.com/p/DT8H8IBCMv-/"
-          data-instgrm-version="14"
-          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
-          <a href="https://www.instagram.com/p/DT8H8IBCMv-/" target="_blank" rel="noopener">View on Instagram</a>
-        </blockquote>
-      </div>
+    <div class="photos-grid-ig reveal">
+      <a href="https://www.instagram.com/p/DXjwFjGkuM3/" target="_blank" rel="noopener" class="ig-card square">
+        <img src="images/DXjwFjGkuM3.jpg" alt="Photo">
+        <div class="ig-card-overlay"><span class="ig-card-icon">⊕</span></div>
+      </a>
+      <a href="https://www.instagram.com/p/DXRNI2hEf9Y/" target="_blank" rel="noopener" class="ig-card square">
+        <img src="images/DXRNI2hEf9Y.jpg" alt="Photo">
+        <div class="ig-card-overlay"><span class="ig-card-icon">⊕</span></div>
+      </a>
+      <a href="https://www.instagram.com/p/DT8H8IBCMv-/" target="_blank" rel="noopener" class="ig-card square">
+        <img src="images/DT8H8IBCMv-.jpg" alt="Photo">
+        <div class="ig-card-overlay"><span class="ig-card-icon">⊕</span></div>
+      </a>
     </div>
   </div>
 
@@ -662,7 +638,6 @@
   </div>
 </footer>
 
-<script async src="//www.instagram.com/embed.js"></script>
 <script>
   // Cursor
   const cur = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
