@@ -135,17 +135,16 @@
   .portfolio-item:nth-child(5) { grid-column:span 4; }
   .portfolio-item:nth-child(6) { grid-column:span 4; }
 
-  .p-img { width:100%;min-height:260px;transition:transform .6s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden; }
-  .portfolio-item:nth-child(1) .p-img { min-height:520px; }
+  .p-img { width:100%;aspect-ratio:4/5;transition:transform .6s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden; }
   .portfolio-item:hover .p-img { transform:scale(1.05); }
 
   /* Real image cards */
-  .p-img img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block; }
+  .p-img img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block; }
 
   /* Instagram media cards */
   .ig-card { position:relative;overflow:hidden;display:block;text-decoration:none;aspect-ratio:9/16; }
-  .ig-card.square { aspect-ratio:1/1; }
-  .ig-card img { width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94); }
+  .ig-card.square { aspect-ratio:4/5; }
+  .ig-card img { width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .6s cubic-bezier(.25,.46,.45,.94); }
   .ig-card:hover img { transform:scale(1.05); }
   .ig-card-overlay { position:absolute;inset:0;background:rgba(42,21,32,0);display:flex;align-items:center;justify-content:center;transition:background .4s; }
   .ig-card:hover .ig-card-overlay { background:rgba(42,21,32,.45); }
