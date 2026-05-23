@@ -348,6 +348,37 @@
   /* Dim the ::after gradient when overlay is visible */
   .portfolio-item:hover .p-img::after { opacity:.5; }
 
+  /* ── Inline video on cards ── */
+  /* Video element sits just above the thumbnail, hidden until playing */
+  .ig-video {
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:top center;
+    opacity:0;transition:opacity .45s ease;
+    pointer-events:none;z-index:1;
+  }
+  .ig-card.playing .ig-video { opacity:1; }
+
+  /* Video for the first portfolio card */
+  .p-video {
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:top center;
+    opacity:0;transition:opacity .45s ease;
+    pointer-events:none;z-index:1;
+  }
+  .portfolio-item.playing .p-video { opacity:1; }
+
+  /* Autoplay video inside the featured reel strip thumbnail */
+  .fr-video {
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:top center;z-index:1;
+  }
+
+  /* Keep badges/captions above the video layer */
+  .ig-type-badge { z-index:4; }
+  .ig-card-caption { z-index:4; }
+  .ig-card-overlay { z-index:3; }
+  .ping-wrap { z-index:2; }
+
   /* ── Featured reel strip ── */
   .featured-reel-wrap {
     margin-top:3rem;padding:.9rem;
@@ -446,8 +477,8 @@
   </div>
 
   <div class="portfolio-grid">
-    <a href="https://www.instagram.com/reel/DYjY6vEOGvu/" target="_blank" rel="noopener" class="portfolio-item" data-cat="travel">
-      <div class="p-img"><img src="images/DYjY6vEOGvu.jpg" alt="Diamond Beach, Bali"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+    <a href="https://www.instagram.com/reel/DYjY6vEOGvu/" target="_blank" rel="noopener" class="portfolio-item" data-cat="travel" data-video>
+      <div class="p-img"><img src="images/DYjY6vEOGvu.jpg" alt="Diamond Beach, Bali"><video class="p-video" data-src="videos/DYjY6vEOGvu.mp4" muted loop playsinline></video><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Travel</div>
         <div class="p-name">Diamond Beach</div>
@@ -505,6 +536,7 @@
     <a href="https://www.instagram.com/reel/DYZfgn9SixU/" target="_blank" rel="noopener" class="featured-reel-wrap reveal">
       <div class="featured-reel-thumb">
         <img src="images/DYZfgn9SixU.jpg" alt="Nepal Beyond the Postcards">
+        <video class="fr-video" src="videos/DYZfgn9SixU.mp4" muted loop playsinline autoplay></video>
       </div>
       <div class="featured-reel-info">
         <div class="fr-label">Featured Reel</div>
@@ -516,8 +548,9 @@
 
     <!-- 5-reel grid -->
     <div class="reels-grid-ig reveal">
-      <a href="https://www.instagram.com/reel/DXb9GwwCMHK/" target="_blank" rel="noopener" class="ig-card">
+      <a href="https://www.instagram.com/reel/DXb9GwwCMHK/" target="_blank" rel="noopener" class="ig-card" data-video>
         <img src="images/DXb9GwwCMHK.jpg" alt="Char Dham Yatra">
+        <video class="ig-video" data-src="videos/DXb9GwwCMHK.mp4" muted loop playsinline></video>
         <div class="ig-type-badge">▶ Reel</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
         <div class="ig-card-caption">
@@ -525,8 +558,9 @@
           <span class="ig-caption-loc">Uttarakhand, India</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/reel/DYe9oK9SG_z/" target="_blank" rel="noopener" class="ig-card">
+      <a href="https://www.instagram.com/reel/DYe9oK9SG_z/" target="_blank" rel="noopener" class="ig-card" data-video>
         <img src="images/DYe9oK9SG_z.jpg" alt="Welcome to Bali">
+        <video class="ig-video" data-src="videos/DYe9oK9SG_z.mp4" muted loop playsinline></video>
         <div class="ig-type-badge">▶ Reel</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
         <div class="ig-card-caption">
@@ -534,8 +568,9 @@
           <span class="ig-caption-loc">Bali, Indonesia</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/reel/DYHghx7Ia8p/" target="_blank" rel="noopener" class="ig-card">
+      <a href="https://www.instagram.com/reel/DYHghx7Ia8p/" target="_blank" rel="noopener" class="ig-card" data-video>
         <img src="images/DYHghx7Ia8p.jpg" alt="KL Travel Guide">
+        <video class="ig-video" data-src="videos/DYHghx7Ia8p.mp4" muted loop playsinline></video>
         <div class="ig-type-badge">▶ Reel</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
         <div class="ig-card-caption">
@@ -543,8 +578,9 @@
           <span class="ig-caption-loc">Kuala Lumpur, Malaysia</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/reel/DKRb4AWSwRH/" target="_blank" rel="noopener" class="ig-card">
+      <a href="https://www.instagram.com/reel/DKRb4AWSwRH/" target="_blank" rel="noopener" class="ig-card" data-video>
         <img src="images/DKRb4AWSwRH.jpg" alt="Assi Ghat, Banaras">
+        <video class="ig-video" data-src="videos/DKRb4AWSwRH.mp4" muted loop playsinline></video>
         <div class="ig-type-badge">▶ Reel</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
         <div class="ig-card-caption">
@@ -552,8 +588,9 @@
           <span class="ig-caption-loc">Banaras, India</span>
         </div>
       </a>
-      <a href="https://www.instagram.com/reel/DUik8u2EsVK/" target="_blank" rel="noopener" class="ig-card">
+      <a href="https://www.instagram.com/reel/DUik8u2EsVK/" target="_blank" rel="noopener" class="ig-card" data-video>
         <img src="images/DUik8u2EsVK.jpg" alt="Travel Planning Essentials">
+        <video class="ig-video" data-src="videos/DUik8u2EsVK.mp4" muted loop playsinline></video>
         <div class="ig-type-badge">▶ Reel</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
         <div class="ig-card-caption">
@@ -820,6 +857,34 @@
   }));
   // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}}));
+
+  // ── Hover-to-play inline videos ──
+  document.querySelectorAll('[data-video]').forEach(card=>{
+    const video=card.querySelector('.ig-video,.p-video');
+    if(!video) return;
+    card.addEventListener('mouseenter',()=>{
+      // Lazy-load src on first hover
+      if(!video.src && video.dataset.src){ video.src=video.dataset.src; }
+      video.play().catch(()=>{});
+      card.classList.add('playing');
+    });
+    card.addEventListener('mouseleave',()=>{
+      video.pause();
+      video.currentTime=0;
+      card.classList.remove('playing');
+    });
+  });
+
+  // ── Featured strip autoplay (fallback: play on scroll into view) ──
+  const frVideo=document.querySelector('.fr-video');
+  if(frVideo){
+    frVideo.play().catch(()=>{
+      const ob=new IntersectionObserver(e=>{
+        if(e[0].isIntersecting){ frVideo.play().catch(()=>{}); ob.disconnect(); }
+      },{threshold:.2});
+      ob.observe(frVideo);
+    });
+  }
 </script>
 </body>
 </html>
