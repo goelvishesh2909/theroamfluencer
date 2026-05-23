@@ -41,11 +41,13 @@
     position: fixed; top:0; left:0; right:0; z-index:100;
     display:flex; align-items:center; justify-content:space-between;
     padding: 2rem 4rem;
-    transition: background .4s, padding .4s, box-shadow .4s;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.55) 0%, transparent 100%);
+    transition: background .35s, padding .35s, box-shadow .35s, backdrop-filter .35s;
   }
   nav.scrolled {
     background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     padding: 1.2rem 4rem;
     box-shadow: 0 1px 0 var(--light-border);
   }
@@ -831,7 +833,7 @@
     el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='34px';ring.style.height='34px';});
   });
   // Scroll nav
-  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>10));
   // Reveal
   const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
