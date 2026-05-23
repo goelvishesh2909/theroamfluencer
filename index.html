@@ -128,12 +128,13 @@
 
   .portfolio-grid { display:grid;grid-template-columns:repeat(12,1fr);gap:1.2rem; }
   .portfolio-item { position:relative;overflow:hidden;cursor:pointer;text-decoration:none;display:block; }
-  .portfolio-item:nth-child(1) { grid-column:span 7; }
-  .portfolio-item:nth-child(2) { grid-column:span 5; }
-  .portfolio-item:nth-child(3) { grid-column:span 5; }
-  .portfolio-item:nth-child(4) { grid-column:span 4; }
+  /* Clean 3-column portfolio grid — all rows sum to 12 */
+  .portfolio-item:nth-child(1) { grid-column:span 5; }
+  .portfolio-item:nth-child(2) { grid-column:span 4; }
+  .portfolio-item:nth-child(3) { grid-column:span 3; }
+  .portfolio-item:nth-child(4) { grid-column:span 3; }
   .portfolio-item:nth-child(5) { grid-column:span 4; }
-  .portfolio-item:nth-child(6) { grid-column:span 4; }
+  .portfolio-item:nth-child(6) { grid-column:span 5; }
 
   .p-img { width:100%;aspect-ratio:4/5;transition:transform .6s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden; }
   .portfolio-item:hover .p-img { transform:scale(1.05); }
