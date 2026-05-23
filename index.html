@@ -136,6 +136,9 @@
   .portfolio-item:nth-child(6) { grid-column:span 4; }
 
   .p-img { width:100%;aspect-ratio:4/5;transition:transform .6s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden; }
+  /* Featured card (span 2 rows) — let the image fill the full grid height */
+  .portfolio-item:nth-child(1) { display:flex;flex-direction:column; }
+  .portfolio-item:nth-child(1) .p-img { aspect-ratio:unset;flex:1;min-height:0; }
   .portfolio-item:hover .p-img { transform:scale(1.05); }
 
   /* Real image cards */
