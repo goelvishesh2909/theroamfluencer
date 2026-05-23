@@ -196,7 +196,7 @@
   .about-visual { position:relative; }
   .about-main { width:100%;aspect-ratio:3/4;background:linear-gradient(145deg,#FAD9E3 0%,#F2B8C6 40%,#E88FA8 70%,#D06880 100%);position:relative;overflow:hidden; }
   .about-main::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 35% 65%,rgba(255,255,255,.3) 0%,transparent 60%); }
-  .about-float { position:absolute;bottom:-2rem;right:-2rem;width:55%;aspect-ratio:1;background:linear-gradient(135deg,#F5C5D5 0%,#E08090 100%);border:4px solid var(--white); }
+  .about-float { position:absolute;bottom:-2rem;right:-2rem;width:55%;aspect-ratio:1;background:linear-gradient(135deg,#F5C5D5 0%,#E08090 100%);border:4px solid var(--white);overflow:hidden; }
   .about-label { position:absolute;top:2rem;left:-1.5rem;background:var(--rose);color:var(--white);padding:.5rem 1.2rem;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase; }
   .about-text p { color:var(--mid);line-height:1.9;margin-bottom:1.5rem;font-size:.92rem; }
   .pillars { display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.5rem; }
@@ -284,6 +284,92 @@
     footer{flex-direction:column;gap:1.5rem;text-align:center;}
     .brands-bar{padding:2.5rem 2rem;}
     .embeds-grid,.embeds-grid-photos{grid-template-columns:1fr;}
+    .reels-grid-ig{grid-template-columns:1fr 1fr;}
+  }
+
+  /* ── Always-visible caption on reel/photo cards ── */
+  .ig-card-caption {
+    position:absolute;bottom:0;left:0;right:0;
+    padding:3rem 1rem .9rem;z-index:3;
+    background:linear-gradient(to top,rgba(42,21,32,.92) 0%,rgba(42,21,32,.18) 65%,transparent 100%);
+    pointer-events:none;
+  }
+  .ig-caption-title {
+    font-family:'Clash Display',sans-serif;font-size:.82rem;font-weight:400;
+    color:var(--white);display:block;line-height:1.3;
+  }
+  .ig-caption-loc {
+    font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;
+    color:rgba(255,255,255,.55);margin-top:.22rem;display:block;
+  }
+
+  /* ── Type badge (top-left pill on cards) ── */
+  .ig-type-badge {
+    position:absolute;top:.65rem;left:.65rem;z-index:4;
+    background:rgba(255,255,255,.15);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    color:var(--white);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;
+    padding:.28rem .65rem;display:inline-flex;align-items:center;gap:.3rem;pointer-events:none;
+  }
+
+  /* ── Hero Instagram social proof badge ── */
+  .hero-ig-badge {
+    display:inline-flex;align-items:center;gap:.9rem;
+    background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(232,114,143,.22);padding:.65rem 1.3rem;margin-bottom:2rem;
+  }
+  .badge-avatar {
+    width:32px;height:32px;border-radius:50%;flex-shrink:0;
+    background:linear-gradient(135deg,var(--blush) 0%,var(--deep-rose) 100%);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Clash Display',sans-serif;font-size:.72rem;font-weight:600;color:var(--white);
+  }
+  .badge-info { display:flex;flex-direction:column;gap:.08rem; }
+  .badge-handle { font-size:.62rem;letter-spacing:.08em;color:var(--ink);font-weight:500; }
+  .badge-stat { font-size:.57rem;letter-spacing:.04em;color:var(--muted); }
+  .badge-dot { width:5px;height:5px;background:var(--rose);border-radius:50%;flex-shrink:0; }
+
+  /* ── About section real image ── */
+  .about-main { overflow:hidden; }
+  .about-main img {
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:top center;display:block;
+  }
+
+  /* ── Portfolio item: always show subtle overlay ── */
+  .portfolio-item .portfolio-overlay {
+    opacity:0;
+    background:linear-gradient(to top,rgba(42,21,32,.78) 0%,rgba(42,21,32,.1) 50%,transparent 100%);
+  }
+  .portfolio-item:nth-child(1) .portfolio-overlay,
+  .portfolio-item:hover .portfolio-overlay { opacity:1; }
+  /* Dim the ::after gradient when overlay is visible */
+  .portfolio-item:hover .p-img::after { opacity:.5; }
+
+  /* ── Featured reel strip ── */
+  .featured-reel-wrap {
+    margin-top:3rem;padding:.9rem;
+    background:var(--ink);display:grid;grid-template-columns:auto 1fr;gap:0;align-items:stretch;
+    text-decoration:none;overflow:hidden;
+  }
+  .featured-reel-thumb {
+    width:160px;flex-shrink:0;position:relative;overflow:hidden;aspect-ratio:9/16;
+  }
+  .featured-reel-thumb img { width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .6s cubic-bezier(.25,.46,.45,.94); }
+  .featured-reel-wrap:hover .featured-reel-thumb img { transform:scale(1.05); }
+  .featured-reel-info {
+    padding:2rem 2.5rem;display:flex;flex-direction:column;justify-content:center;
+  }
+  .fr-label { font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:var(--blush);display:flex;align-items:center;gap:.6rem;margin-bottom:1.2rem; }
+  .fr-label::before { content:'';width:20px;height:1px;background:var(--blush); }
+  .fr-title { font-family:'Clash Display',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:400;color:var(--white);line-height:1.1;margin-bottom:.8rem; }
+  .fr-title em { font-style:normal;font-weight:600;color:var(--blush); }
+  .fr-desc { font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.85;max-width:480px;margin-bottom:2rem; }
+  .fr-cta { display:inline-flex;align-items:center;gap:.7rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--white);border:1px solid rgba(255,255,255,.2);padding:.75rem 1.5rem;width:fit-content;transition:background .3s,border-color .3s; }
+  .fr-cta:hover { background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4); }
+  .fr-play-dot { width:8px;height:8px;border-radius:50%;background:var(--rose); }
+  @media(max-width:900px){
+    .featured-reel-wrap{grid-template-columns:1fr;}
+    .featured-reel-thumb{width:100%;aspect-ratio:4/3;}
   }
 </style>
 </head>
@@ -318,7 +404,15 @@
       Through <em>Her</em><br>
       Lens
     </h1>
-    <p class="hero-sub">Storytelling that moves. From Bali sunsets — authentic content that inspires wanderlust and drives real brand results.</p>
+    <p class="hero-sub">Storytelling that moves. From Bali sunsets to Himalayan treks — authentic content that inspires wanderlust and drives real brand results.</p>
+    <div class="hero-ig-badge">
+      <div class="badge-avatar">M</div>
+      <div class="badge-info">
+        <span class="badge-handle">@thatroamfluencer</span>
+        <span class="badge-stat">2.5K Followers · 8.5% Avg Engagement</span>
+      </div>
+      <div class="badge-dot"></div>
+    </div>
     <div class="hero-actions">
       <a href="#work" class="btn-pink">View Portfolio</a>
       <a href="#contact" class="btn-outline">Start a Project →</a>
@@ -341,56 +435,56 @@
   <h2 class="section-title reveal">Stories That <em>Travel</em> With You</h2>
 
   <div class="portfolio-filters reveal">
-    <button class="filter-btn active">All</button>
-    <button class="filter-btn">Travel</button>
-    <button class="filter-btn">Hospitality</button>
-    <button class="filter-btn">Fashion</button>
-    <button class="filter-btn">Lifestyle</button>
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="travel">Travel</button>
+    <button class="filter-btn" data-filter="hospitality">Hospitality</button>
+    <button class="filter-btn" data-filter="fashion">Fashion</button>
+    <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
   </div>
 
   <div class="portfolio-grid">
-    <a href="https://www.instagram.com/reel/DXb9GwwCMHK/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img"><img src="images/DXb9GwwCMHK.jpg" alt="Solo Trip, Phuket"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+    <a href="https://www.instagram.com/reel/DXb9GwwCMHK/" target="_blank" rel="noopener" class="portfolio-item" data-cat="travel">
+      <div class="p-img"><img src="images/DXb9GwwCMHK.jpg" alt="Char Dham Yatra"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Travel · Spiritual</div>
         <div class="p-name">Char Dham Yatra</div>
         <div class="p-loc">Uttarakhand, India</div>
       </div>
     </a>
-    <a href="https://www.instagram.com/reel/DUik8u2EsVK/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img"><img src="images/DUik8u2EsVK.jpg" alt="Green Valley Resort"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+    <a href="https://www.instagram.com/reel/DUik8u2EsVK/" target="_blank" rel="noopener" class="portfolio-item" data-cat="lifestyle">
+      <div class="p-img"><img src="images/DUik8u2EsVK.jpg" alt="Travel Planning Essentials"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Lifestyle · Travel</div>
         <div class="p-name">Travel Planning Essentials</div>
         <div class="p-loc">Worldwide</div>
       </div>
     </a>
-    <a href="https://www.instagram.com/reel/DTyCQUdiBkp/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img"><img src="images/DTyCQUdiBkp.jpg" alt="Beach Editorial"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+    <a href="https://www.instagram.com/reel/DTyCQUdiBkp/" target="_blank" rel="noopener" class="portfolio-item" data-cat="fashion">
+      <div class="p-img"><img src="images/DTyCQUdiBkp.jpg" alt="Golden Hour Dress, Bali"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Fashion</div>
         <div class="p-name">Golden Hour Dress</div>
         <div class="p-loc">Bali, Indonesia</div>
       </div>
     </a>
-    <a href="https://www.instagram.com/reel/DXg_hzRiGHO/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img"><img src="images/DXg_hzRiGHO.jpg" alt="BIG 4 Corporate Culture"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+    <a href="https://www.instagram.com/reel/DXg_hzRiGHO/" target="_blank" rel="noopener" class="portfolio-item" data-cat="hospitality">
+      <div class="p-img"><img src="images/DXg_hzRiGHO.jpg" alt="Vegetarian Dining, KL"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Hospitality · Food</div>
         <div class="p-name">Vegetarian Dining</div>
         <div class="p-loc">Kuala Lumpur, Malaysia</div>
       </div>
     </a>
-    <a href="https://www.instagram.com/reel/DYZfgn9SixU/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img"><img src="images/DYZfgn9SixU.jpg" alt="Rice Terraces"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+    <a href="https://www.instagram.com/reel/DYZfgn9SixU/" target="_blank" rel="noopener" class="portfolio-item" data-cat="travel">
+      <div class="p-img"><img src="images/DYZfgn9SixU.jpg" alt="Nepal Beyond the Postcards"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Travel Guide</div>
         <div class="p-name">Nepal, Beyond the Postcards</div>
         <div class="p-loc">Nepal</div>
       </div>
     </a>
-    <a href="https://www.instagram.com/p/DXjwFjGkuM3/" target="_blank" rel="noopener" class="portfolio-item">
-      <div class="p-img"><img src="images/DXjwFjGkuM3.jpg" alt="Royal Dream Restaurant"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+    <a href="https://www.instagram.com/p/DXjwFjGkuM3/" target="_blank" rel="noopener" class="portfolio-item" data-cat="travel">
+      <div class="p-img"><img src="images/DXjwFjGkuM3.jpg" alt="Udaipur Travel Guide"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
       <div class="portfolio-overlay">
         <div class="p-cat">Travel Guide</div>
         <div class="p-name">Udaipur Travel Guide</div>
@@ -403,26 +497,66 @@
   <div class="media-row">
     <div class="media-row-label reveal">Reels</div>
     <h3 class="media-row-title reveal">Watch Her <em>World</em></h3>
+
+    <!-- Featured reel (hero card) -->
+    <a href="https://www.instagram.com/reel/DYZfgn9SixU/" target="_blank" rel="noopener" class="featured-reel-wrap reveal">
+      <div class="featured-reel-thumb">
+        <img src="images/DYZfgn9SixU.jpg" alt="Nepal Beyond the Postcards">
+      </div>
+      <div class="featured-reel-info">
+        <div class="fr-label">Featured Reel</div>
+        <h4 class="fr-title">Nepal, <em>Beyond</em><br>the Postcards</h4>
+        <p class="fr-desc">From hidden teahouses to sunrise above the clouds — a raw, unfiltered look at Nepal that goes beyond the tourist trail. Watch the full reel on Instagram.</p>
+        <span class="fr-cta"><span class="fr-play-dot"></span> Watch on Instagram →</span>
+      </div>
+    </a>
+
+    <!-- 5-reel grid -->
     <div class="reels-grid-ig reveal">
       <a href="https://www.instagram.com/reel/DXb9GwwCMHK/" target="_blank" rel="noopener" class="ig-card">
-        <img src="images/DXb9GwwCMHK.jpg" alt="Reel">
+        <img src="images/DXb9GwwCMHK.jpg" alt="Char Dham Yatra">
+        <div class="ig-type-badge">▶ Reel</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
+        <div class="ig-card-caption">
+          <span class="ig-caption-title">Char Dham Yatra</span>
+          <span class="ig-caption-loc">Uttarakhand, India</span>
+        </div>
       </a>
       <a href="https://www.instagram.com/reel/DUik8u2EsVK/" target="_blank" rel="noopener" class="ig-card">
-        <img src="images/DUik8u2EsVK.jpg" alt="Reel">
+        <img src="images/DUik8u2EsVK.jpg" alt="Travel Planning Essentials">
+        <div class="ig-type-badge">▶ Reel</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
+        <div class="ig-card-caption">
+          <span class="ig-caption-title">Travel Planning Essentials</span>
+          <span class="ig-caption-loc">Worldwide</span>
+        </div>
       </a>
       <a href="https://www.instagram.com/reel/DTyCQUdiBkp/" target="_blank" rel="noopener" class="ig-card">
-        <img src="images/DTyCQUdiBkp.jpg" alt="Reel">
+        <img src="images/DTyCQUdiBkp.jpg" alt="Golden Hour Dress, Bali">
+        <div class="ig-type-badge">▶ Reel</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
+        <div class="ig-card-caption">
+          <span class="ig-caption-title">Golden Hour Dress</span>
+          <span class="ig-caption-loc">Bali, Indonesia</span>
+        </div>
       </a>
       <a href="https://www.instagram.com/reel/DXg_hzRiGHO/" target="_blank" rel="noopener" class="ig-card">
-        <img src="images/DXg_hzRiGHO.jpg" alt="Reel">
+        <img src="images/DXg_hzRiGHO.jpg" alt="Vegetarian Dining Guide, KL">
+        <div class="ig-type-badge">▶ Reel</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
+        <div class="ig-card-caption">
+          <span class="ig-caption-title">Vegetarian Dining Guide</span>
+          <span class="ig-caption-loc">Kuala Lumpur, Malaysia</span>
+        </div>
       </a>
       <a href="https://www.instagram.com/reel/DYZfgn9SixU/" target="_blank" rel="noopener" class="ig-card">
-        <img src="images/DYZfgn9SixU.jpg" alt="Reel">
+        <img src="images/DYZfgn9SixU.jpg" alt="Nepal Beyond the Postcards">
+        <div class="ig-type-badge">▶ Reel</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">▶</span></div>
+        <div class="ig-card-caption">
+          <span class="ig-caption-title">Nepal, Beyond the Postcards</span>
+          <span class="ig-caption-loc">Nepal</span>
+        </div>
       </a>
     </div>
   </div>
@@ -433,16 +567,31 @@
     <h3 class="media-row-title reveal">Still <em>Stories</em></h3>
     <div class="photos-grid-ig reveal">
       <a href="https://www.instagram.com/p/DXjwFjGkuM3/" target="_blank" rel="noopener" class="ig-card square">
-        <img src="images/DXjwFjGkuM3.jpg" alt="Photo">
+        <img src="images/DXjwFjGkuM3.jpg" alt="Udaipur Travel Guide">
+        <div class="ig-type-badge">⊕ Photo</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">⊕</span></div>
+        <div class="ig-card-caption">
+          <span class="ig-caption-title">Udaipur Travel Guide</span>
+          <span class="ig-caption-loc">Udaipur, India</span>
+        </div>
       </a>
       <a href="https://www.instagram.com/p/DXRNI2hEf9Y/" target="_blank" rel="noopener" class="ig-card square">
-        <img src="images/DXRNI2hEf9Y.jpg" alt="Photo">
+        <img src="images/DXRNI2hEf9Y.jpg" alt="Summer Color Diary">
+        <div class="ig-type-badge">⊕ Photo</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">⊕</span></div>
+        <div class="ig-card-caption">
+          <span class="ig-caption-title">Summer Color Diary</span>
+          <span class="ig-caption-loc">Bali, Indonesia</span>
+        </div>
       </a>
       <a href="https://www.instagram.com/p/DT8H8IBCMv-/" target="_blank" rel="noopener" class="ig-card square">
-        <img src="images/DT8H8IBCMv-.jpg" alt="Photo">
+        <img src="images/DT8H8IBCMv-.jpg" alt="48 Hours in Ubud">
+        <div class="ig-type-badge">⊕ Photo</div>
         <div class="ig-card-overlay"><span class="ig-card-icon">⊕</span></div>
+        <div class="ig-card-caption">
+          <span class="ig-caption-title">48 Hours in Ubud</span>
+          <span class="ig-caption-loc">Bali, Indonesia</span>
+        </div>
       </a>
     </div>
   </div>
@@ -454,8 +603,8 @@
   <div class="about-grid">
     <div class="about-visual reveal">
       <div class="about-label">@THATROAMFLUENCER</div>
-      <div class="about-main"></div>
-      <div class="about-float"></div>
+      <div class="about-main"><img src="images/DTyCQUdiBkp.jpg" alt="Malaika Agrawal — @thatroamfluencer"></div>
+      <div class="about-float"><img src="images/DXjwFjGkuM3.jpg" alt="Udaipur" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;"></div>
     </div>
     <div class="about-text">
       <div class="section-tag reveal">About</div>
@@ -629,7 +778,7 @@
 <!-- Footer -->
 <footer>
   <div class="footer-logo">ThatRoamfluencer</div>
-  <div class="footer-copy">© 2025 ThatRoamfluencer. All rights reserved.</div>
+  <div class="footer-copy">© 2026 ThatRoamfluencer. All rights reserved.</div>
   <div class="footer-socials">
     <a href="https://www.instagram.com/thatroamfluencer" class="social-link">Instagram</a>
     <a href="#" class="social-link">YouTube</a>
@@ -652,8 +801,20 @@
   // Reveal
   const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-  // Filters
-  document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',function(){document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
+  // Filters — real category filtering
+  document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+    const cat=this.dataset.filter;
+    document.querySelectorAll('.portfolio-item').forEach(item=>{
+      if(cat==='all'||item.dataset.cat===cat){
+        item.style.opacity='1';item.style.pointerEvents='auto';item.style.transform='scale(1)';
+      } else {
+        item.style.opacity='.25';item.style.pointerEvents='none';item.style.transform='scale(.97)';
+      }
+      item.style.transition='opacity .4s,transform .4s';
+    });
+  }));
   // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}}));
 </script>
