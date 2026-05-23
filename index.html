@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THATROAMFLUENCER — Travel · Hospitality · Fashion · Lifestyle</title>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blush:    #F2B8C6;
+    --rose:     #E8728F;
+    --deep-rose:#C94E6E;
+    --petal:    #FAD9E3;
+    --soft:     #FFF0F4;
+    --white:    #FFFFFF;
+    --ink:      #2A1520;
+    --mid:      #7A3A50;
+    --muted:    #B07085;
+    --light-border: rgba(232,114,143,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'General Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor      { width:8px;height:8px;background:var(--rose);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s; }
+  .cursor-ring { width:34px;height:34px;border:1px solid rgba(232,114,143,0.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .15s ease,width .3s,height .3s; }
+
+  /* Nav */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 2rem 4rem;
+    transition: background .4s, padding .4s, box-shadow .4s;
+  }
+  nav.scrolled {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(16px);
+    padding: 1.2rem 4rem;
+    box-shadow: 0 1px 0 var(--light-border);
+  }
+  .nav-logo { font-family:'Clash Display',sans-serif;font-weight:500;font-size:1.05rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);text-decoration:none; }
+  .nav-links { display:flex;gap:3rem;list-style:none; }
+  .nav-links a { font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s; }
+  .nav-links a:hover { color:var(--rose); }
+  .nav-cta { font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white);background:var(--rose);padding:.65rem 1.6rem;text-decoration:none;transition:background .3s,transform .2s; }
+  .nav-cta:hover { background:var(--deep-rose);transform:translateY(-1px); }
+
+  /* Hero */
+  .hero {
+    position:relative; min-height:100vh; display:flex; align-items:flex-end;
+    padding: 0 4rem 6rem;
+    background: linear-gradient(135deg, #FFF0F4 0%, #FAD9E3 35%, #F5C5D5 65%, #FFF0F4 100%);
+    overflow:hidden;
+  }
+  .hero-blob1 {
+    position:absolute;top:-120px;right:-80px;
+    width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(232,114,143,0.25) 0%,transparent 70%);
+    animation:blobFloat 10s ease-in-out infinite;
+  }
+  .hero-blob2 {
+    position:absolute;bottom:60px;left:100px;
+    width:350px;height:350px;border-radius:50%;
+    background:radial-gradient(circle,rgba(242,184,198,0.35) 0%,transparent 70%);
+    animation:blobFloat 14s ease-in-out infinite reverse;
+  }
+  @keyframes blobFloat { 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-30px) scale(1.04);} }
+
+  /* Decorative rings */
+  .hero-ring { position:absolute;border-radius:50%;border:1px solid rgba(232,114,143,0.2);pointer-events:none; }
+  .ring1 { width:500px;height:500px;top:-50px;right:80px;animation:rotateSlow 40s linear infinite; }
+  .ring2 { width:300px;height:300px;top:80px;right:230px;animation:rotateSlow 25s linear infinite reverse;opacity:.5; }
+  @keyframes rotateSlow { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+  .hero-content { position:relative;z-index:2;max-width:820px; }
+  .hero-tag { font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--rose);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem; }
+  .hero-tag::before { content:'';width:36px;height:1px;background:var(--rose); }
+
+  .hero-title {
+    font-family:'Clash Display',sans-serif;font-weight:400;
+    font-size:clamp(3.8rem,9vw,7.5rem);line-height:.92;letter-spacing:-.02em;margin-bottom:2rem;
+    color:var(--ink);
+  }
+  .hero-title em { font-style:normal;font-weight:600;color:var(--rose); }
+  .hero-sub { font-size:.9rem;letter-spacing:.05em;color:var(--muted);max-width:400px;line-height:1.9;margin-bottom:3rem; }
+  .hero-actions { display:flex;gap:1.5rem;align-items:center; }
+
+  .btn-pink { font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--white);background:var(--rose);padding:1rem 2.5rem;text-decoration:none;transition:transform .3s,box-shadow .3s; }
+  .btn-pink:hover { transform:translateY(-2px);box-shadow:0 12px 40px rgba(232,114,143,.35); }
+  .btn-outline { font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);border:1px solid var(--light-border);padding:1rem 2rem;text-decoration:none;transition:background .3s,color .3s; }
+  .btn-outline:hover { background:var(--rose);color:var(--white); }
+
+  .scroll-hint { position:absolute;bottom:2.5rem;right:4rem;z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem; }
+  .scroll-hint span { font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl; }
+  .scroll-hint::after { content:'';width:1px;height:55px;background:linear-gradient(to bottom,var(--rose),transparent);animation:scrollAnim 2s ease-in-out infinite; }
+  @keyframes scrollAnim { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+  /* Stats */
+  .stats-bar { display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--light-border);border-bottom:1px solid var(--light-border); }
+  .stat-item { text-align:center;padding:2.2rem 1rem;border-right:1px solid var(--light-border); }
+  .stat-item:last-child { border-right:none; }
+  .stat-num { font-family:'Clash Display',sans-serif;font-size:2.8rem;font-weight:400;color:var(--rose);display:block;line-height:1; }
+  .stat-label { font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;display:block; }
+
+  /* Section base */
+  section { padding:7rem 4rem; }
+  .section-tag { font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--rose);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem; }
+  .section-tag::before { content:'';width:28px;height:1px;background:var(--rose); }
+  .section-title { font-family:'Clash Display',sans-serif;font-weight:400;font-size:clamp(2.4rem,5vw,4rem);line-height:1.05;margin-bottom:1.5rem;color:var(--ink); }
+  .section-title em { font-style:normal;font-weight:600;color:var(--rose); }
+
+  /* Work */
+  .work-bg { background:var(--soft); }
+  .portfolio-filters { display:flex;gap:2rem;margin-bottom:3rem;border-bottom:1px solid var(--light-border);padding-bottom:1.5rem;flex-wrap:wrap; }
+  .filter-btn { font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;transition:color .3s; }
+  .filter-btn.active { color:var(--rose); }
+  .filter-btn:hover { color:var(--ink); }
+
+  .portfolio-grid { display:grid;grid-template-columns:repeat(12,1fr);gap:1.2rem; }
+  .portfolio-item { position:relative;overflow:hidden;cursor:pointer;text-decoration:none;display:block; }
+  .portfolio-item:nth-child(1) { grid-column:span 7;grid-row:span 2; }
+  .portfolio-item:nth-child(2) { grid-column:span 5; }
+  .portfolio-item:nth-child(3) { grid-column:span 5; }
+  .portfolio-item:nth-child(4) { grid-column:span 4; }
+  .portfolio-item:nth-child(5) { grid-column:span 4; }
+  .portfolio-item:nth-child(6) { grid-column:span 4; }
+
+  .p-img { width:100%;min-height:260px;transition:transform .6s cubic-bezier(.25,.46,.45,.94);position:relative;overflow:hidden; }
+  .portfolio-item:nth-child(1) .p-img { min-height:520px; }
+  .portfolio-item:hover .p-img { transform:scale(1.05); }
+
+  /* Pink gradient placeholders */
+  .g1 { background:linear-gradient(145deg,#F5C5D5 0%,#E8A0B8 40%,#D4758F 100%); }
+  .g2 { background:linear-gradient(135deg,#F2B8C6 0%,#DDA0B5 50%,#C47890 100%); }
+  .g3 { background:linear-gradient(150deg,#FAD9E3 0%,#F0AABF 40%,#E08090 100%); }
+  .g4 { background:linear-gradient(140deg,#FADADD 0%,#F2B0C0 50%,#DE8898 100%); }
+  .g5 { background:linear-gradient(155deg,#F5C5D5 0%,#E895AB 40%,#D06880 100%); }
+  .g6 { background:linear-gradient(145deg,#FAD0DC 0%,#F0A0BC 50%,#DC7898 100%); }
+
+  .p-img::after { content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(42,21,32,.7) 0%,transparent 55%); }
+
+  .portfolio-overlay {
+    position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:1.8rem;z-index:2;opacity:0;transition:opacity .4s;
+    background:linear-gradient(to top,rgba(42,21,32,.75) 0%,transparent 60%);
+  }
+  .portfolio-item:nth-child(1) .portfolio-overlay { opacity:1; }
+  .portfolio-item:hover .portfolio-overlay { opacity:1; }
+
+  .p-cat { font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--blush);margin-bottom:.3rem; }
+  .p-name { font-family:'Clash Display',sans-serif;font-size:1.3rem;font-weight:400;color:var(--white); }
+  .p-loc { font-size:.68rem;color:rgba(255,255,255,.55);margin-top:.2rem; }
+
+  /* Ping dot */
+  .ping-wrap { position:absolute;top:38%;left:44%;z-index:1; }
+  .ping-dot { width:9px;height:9px;background:var(--white);border-radius:50%;margin:auto;position:relative; }
+  .ping-dot::after { content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:22px;height:22px;border:1px solid rgba(255,255,255,.5);border-radius:50%;animation:ping 2s ease-out infinite; }
+  @keyframes ping { 0%{transform:translate(-50%,-50%) scale(.8);opacity:.8;} 100%{transform:translate(-50%,-50%) scale(2.2);opacity:0;} }
+
+  /* Instagram Embed Sections */
+  .media-row { margin-top:4.5rem;padding-top:3.5rem;border-top:1px solid var(--light-border); }
+  .media-row-label { font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--rose);display:flex;align-items:center;gap:1rem;margin-bottom:.8rem; }
+  .media-row-label::before { content:'';width:28px;height:1px;background:var(--rose); }
+  .media-row-title { font-family:'Clash Display',sans-serif;font-weight:400;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--ink);margin-bottom:2.5rem; }
+  .media-row-title em { font-style:normal;font-weight:600;color:var(--rose); }
+
+  .embeds-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;align-items:start; }
+  .embeds-grid-photos { display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;align-items:start; }
+  .embed-item { display:flex;justify-content:center;width:100%; }
+  .embed-item blockquote.instagram-media {
+    max-width:100% !important;
+    min-width:0 !important;
+    width:100% !important;
+    margin:0 !important;
+  }
+
+  /* About */
+  .about-grid { display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center; }
+  .about-visual { position:relative; }
+  .about-main { width:100%;aspect-ratio:3/4;background:linear-gradient(145deg,#FAD9E3 0%,#F2B8C6 40%,#E88FA8 70%,#D06880 100%);position:relative;overflow:hidden; }
+  .about-main::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 35% 65%,rgba(255,255,255,.3) 0%,transparent 60%); }
+  .about-float { position:absolute;bottom:-2rem;right:-2rem;width:55%;aspect-ratio:1;background:linear-gradient(135deg,#F5C5D5 0%,#E08090 100%);border:4px solid var(--white); }
+  .about-label { position:absolute;top:2rem;left:-1.5rem;background:var(--rose);color:var(--white);padding:.5rem 1.2rem;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase; }
+  .about-text p { color:var(--mid);line-height:1.9;margin-bottom:1.5rem;font-size:.92rem; }
+  .pillars { display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.5rem; }
+  .pill { font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);border:1px solid var(--light-border);padding:.45rem 1.1rem;background:var(--soft); }
+
+  /* Services */
+  .services-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem;background:var(--light-border); }
+  .service-card { background:var(--white);padding:2.8rem 2.2rem;position:relative;transition:background .35s;overflow:hidden; }
+  .service-card:hover { background:var(--soft); }
+  .service-card::after { content:'';position:absolute;bottom:0;left:0;height:2px;width:0;background:var(--rose);transition:width .5s cubic-bezier(.25,.46,.45,.94); }
+  .service-card:hover::after { width:100%; }
+  .svc-num { font-family:'Clash Display',sans-serif;font-size:3rem;font-weight:400;color:rgba(232,114,143,.12);line-height:1;margin-bottom:1.2rem; }
+  .svc-title { font-family:'Clash Display',sans-serif;font-size:1.35rem;font-weight:500;margin-bottom:.8rem;color:var(--ink); }
+  .svc-desc { font-size:.8rem;color:var(--muted);line-height:1.85; }
+  .svc-tags { display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.3rem; }
+  .svc-tag { font-size:.57rem;letter-spacing:.15em;text-transform:uppercase;color:var(--rose);border:1px solid var(--light-border);padding:.3rem .7rem; }
+
+  /* Brands ticker */
+  .brands-bar { border-top:1px solid var(--light-border);border-bottom:1px solid var(--light-border);padding:3rem 4rem;text-align:center;overflow:hidden; }
+  .brands-label { font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem; }
+  .brands-inner { display:flex;gap:4rem;animation:scroll 22s linear infinite;white-space:nowrap;align-items:center; }
+  @keyframes scroll { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+  .brand-name { font-family:'Clash Display',sans-serif;font-size:1.1rem;letter-spacing:.12em;color:rgba(180,100,130,.35);text-transform:uppercase; }
+
+  /* Testimonials */
+  .testimonials { background:var(--soft); }
+  .testi-grid { display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3.5rem; }
+  .testi-card { background:var(--white);padding:2.8rem;border:1px solid var(--light-border);position:relative; }
+  .testi-card::before { content:'\201C';font-family:'Clash Display',sans-serif;font-size:5rem;color:rgba(232,114,143,.15);position:absolute;top:.5rem;left:1.5rem;line-height:1; }
+  .testi-quote { font-family:'Clash Display',sans-serif;font-size:1.2rem;font-weight:400;line-height:1.6;color:var(--ink);margin-bottom:1.5rem;padding-top:1.5rem; }
+  .testi-credit { display:flex;align-items:center;gap:.8rem; }
+  .credit-dot { width:5px;height:5px;background:var(--rose);border-radius:50%; }
+  .credit-txt { font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted); }
+
+  /* Process */
+  .process-steps { display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem;margin-top:4rem;position:relative; }
+  .process-steps::before { content:'';position:absolute;top:1.2rem;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--light-border) 15%,var(--light-border) 85%,transparent); }
+  .step { position:relative; }
+  .step-num { font-size:.75rem;color:var(--rose);display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem; }
+  .step-num::before { content:'';width:10px;height:10px;border:1px solid var(--rose);border-radius:50%;background:var(--white);display:block;flex-shrink:0;position:relative;z-index:1; }
+  .step-title { font-family:'Clash Display',sans-serif;font-size:1.25rem;font-weight:500;margin-bottom:.7rem;color:var(--ink); }
+  .step-desc { font-size:.78rem;color:var(--muted);line-height:1.85; }
+
+  /* Contact */
+  .contact-section { display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0; }
+  .contact-left { background:linear-gradient(135deg,#FAD9E3 0%,#F5C5D5 100%);padding:6rem 4.5rem; }
+  .contact-left .section-title { color:var(--ink); }
+  .contact-left p { color:var(--mid);font-size:.88rem;line-height:1.9;max-width:360px;margin-bottom:1.5rem; }
+  .contact-details { margin-top:3rem; }
+  .c-detail { margin-bottom:1.2rem; }
+  .c-label { font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.3rem; }
+  .c-val { font-size:.88rem;color:var(--ink); }
+  .contact-right { background:var(--white);padding:6rem 4.5rem; }
+  .form-field { margin-bottom:1.5rem; }
+  .form-field label { display:block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem; }
+  .form-field input,.form-field select,.form-field textarea { width:100%;background:transparent;border:none;border-bottom:1px solid rgba(232,114,143,.25);padding:.7rem 0;font-family:'General Sans',sans-serif;font-size:.88rem;color:var(--ink);outline:none;transition:border-color .3s;cursor:text; }
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus { border-bottom-color:var(--rose); }
+  .form-field textarea { resize:none;height:75px; }
+  .form-row { display:grid;grid-template-columns:1fr 1fr;gap:1.5rem; }
+  .submit-btn { margin-top:2rem;width:100%;background:var(--rose);color:var(--white);border:none;padding:1.1rem;font-family:'General Sans',sans-serif;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;transition:background .3s,transform .2s; }
+  .submit-btn:hover { background:var(--deep-rose);transform:translateY(-1px); }
+
+  /* Footer */
+  footer { background:var(--ink);padding:3.5rem 4rem;display:flex;align-items:center;justify-content:space-between; }
+  .footer-logo { font-family:'Clash Display',sans-serif;font-size:.95rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--white); }
+  .footer-copy { font-size:.62rem;letter-spacing:.1em;color:rgba(255,255,255,.3); }
+  .footer-socials { display:flex;gap:1.5rem; }
+  .social-link { font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);text-decoration:none;transition:color .3s; }
+  .social-link:hover { color:var(--blush); }
+
+  /* Reveal */
+  .reveal { opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.25,.46,.45,.94),transform .75s cubic-bezier(.25,.46,.45,.94); }
+  .reveal.visible { opacity:1;transform:translateY(0); }
+  .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+  @media(max-width:900px){
+    nav{padding:1.5rem 2rem;} .nav-links{display:none;}
+    section{padding:5rem 2rem;} .hero{padding:0 2rem 5rem;}
+    .stats-bar{grid-template-columns:1fr 1fr;}
+    .about-grid{grid-template-columns:1fr;gap:3rem;}
+    .portfolio-grid{grid-template-columns:1fr 1fr;}
+    .portfolio-item{grid-column:span 1 !important;grid-row:span 1 !important;}
+    .services-grid,.testi-grid,.process-steps{grid-template-columns:1fr;}
+    .contact-section{grid-template-columns:1fr;}
+    footer{flex-direction:column;gap:1.5rem;text-align:center;}
+    .brands-bar{padding:2.5rem 2rem;}
+    .embeds-grid,.embeds-grid-photos{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <a href="#" class="nav-logo">ThatRoamfluencer</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Collab</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Work Together</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-blob1"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-ring ring1"></div>
+  <div class="hero-ring ring2"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Travel · Hospitality · Fashion · Lifestyle</div>
+    <h1 class="hero-title">
+      The World<br>
+      Through <em>Her</em><br>
+      Lens
+    </h1>
+    <p class="hero-sub">Storytelling that moves. From Bali sunsets — authentic content that inspires wanderlust and drives real brand results.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-pink">View Portfolio</a>
+      <a href="#contact" class="btn-outline">Start a Project →</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span></div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat-item reveal"><span class="stat-num">2.5K+</span><span class="stat-label">Instagram Followers</span></div>
+  <div class="stat-item reveal d1"><span class="stat-num">5+</span><span class="stat-label">Countries Explored</span></div>
+  <div class="stat-item reveal d2"><span class="stat-num">10+</span><span class="stat-label">Brand Campaigns</span></div>
+  <div class="stat-item reveal d3"><span class="stat-num">8.5%</span><span class="stat-label">Avg Engagement Rate</span></div>
+</div>
+
+<!-- Work -->
+<section id="work" class="work-bg">
+  <div class="section-tag reveal">Selected Work</div>
+  <h2 class="section-title reveal">Stories That <em>Travel</em> With You</h2>
+
+  <div class="portfolio-filters reveal">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Travel</button>
+    <button class="filter-btn">Hospitality</button>
+    <button class="filter-btn">Fashion</button>
+    <button class="filter-btn">Lifestyle</button>
+  </div>
+
+  <div class="portfolio-grid">
+    <a href="https://www.instagram.com/reel/DXb9GwwCMHK/" target="_blank" rel="noopener" class="portfolio-item">
+      <div class="p-img g1"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="portfolio-overlay">
+        <div class="p-cat">Travel · Campaign</div>
+        <div class="p-name">Solo Trip</div>
+        <div class="p-loc">Phuket, Thailand</div>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/reel/DUik8u2EsVK/" target="_blank" rel="noopener" class="portfolio-item">
+      <div class="p-img g2"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="portfolio-overlay">
+        <div class="p-cat">Hospitality</div>
+        <div class="p-name">Green Valley Resort</div>
+        <div class="p-loc">Kathmandu, Nepal</div>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/reel/DTyCQUdiBkp/" target="_blank" rel="noopener" class="portfolio-item">
+      <div class="p-img g3"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="portfolio-overlay">
+        <div class="p-cat">Fashion</div>
+        <div class="p-name">Beach Editorial</div>
+        <div class="p-loc">Gili-T, Bali</div>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/reel/DXg_hzRiGHO/" target="_blank" rel="noopener" class="portfolio-item">
+      <div class="p-img g4"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="portfolio-overlay">
+        <div class="p-cat">Lifestyle</div>
+        <div class="p-name">The BIG 4 Corporate Culture</div>
+        <div class="p-loc">Mumbai, India</div>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/reel/DYZfgn9SixU/" target="_blank" rel="noopener" class="portfolio-item">
+      <div class="p-img g5"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="portfolio-overlay">
+        <div class="p-cat">Travel</div>
+        <div class="p-name">Rice Terraces</div>
+        <div class="p-loc">Ubud, Bali</div>
+      </div>
+    </a>
+    <a href="https://www.instagram.com/p/DXjwFjGkuM3/" target="_blank" rel="noopener" class="portfolio-item">
+      <div class="p-img g6"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
+      <div class="portfolio-overlay">
+        <div class="p-cat">Fashion · Hospitality</div>
+        <div class="p-name">Royal Dream Restaurant</div>
+        <div class="p-loc">Kuala Lumpur, Malaysia</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Reels -->
+  <div class="media-row">
+    <div class="media-row-label reveal">Reels</div>
+    <h3 class="media-row-title reveal">Watch Her <em>World</em></h3>
+    <div class="embeds-grid reveal">
+      <div class="embed-item">
+        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
+          data-instgrm-permalink="https://www.instagram.com/reel/DXb9GwwCMHK/"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+          <a href="https://www.instagram.com/reel/DXb9GwwCMHK/" target="_blank" rel="noopener">View on Instagram</a>
+        </blockquote>
+      </div>
+      <div class="embed-item">
+        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
+          data-instgrm-permalink="https://www.instagram.com/reel/DUik8u2EsVK/"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+          <a href="https://www.instagram.com/reel/DUik8u2EsVK/" target="_blank" rel="noopener">View on Instagram</a>
+        </blockquote>
+      </div>
+      <div class="embed-item">
+        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
+          data-instgrm-permalink="https://www.instagram.com/reel/DTyCQUdiBkp/"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+          <a href="https://www.instagram.com/reel/DTyCQUdiBkp/" target="_blank" rel="noopener">View on Instagram</a>
+        </blockquote>
+      </div>
+      <div class="embed-item">
+        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
+          data-instgrm-permalink="https://www.instagram.com/reel/DXg_hzRiGHO/"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+          <a href="https://www.instagram.com/reel/DXg_hzRiGHO/" target="_blank" rel="noopener">View on Instagram</a>
+        </blockquote>
+      </div>
+      <div class="embed-item">
+        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
+          data-instgrm-permalink="https://www.instagram.com/reel/DYZfgn9SixU/"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+          <a href="https://www.instagram.com/reel/DYZfgn9SixU/" target="_blank" rel="noopener">View on Instagram</a>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photos -->
+  <div class="media-row">
+    <div class="media-row-label reveal">Photos</div>
+    <h3 class="media-row-title reveal">Still <em>Stories</em></h3>
+    <div class="embeds-grid-photos reveal">
+      <div class="embed-item">
+        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
+          data-instgrm-permalink="https://www.instagram.com/p/DXjwFjGkuM3/"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+          <a href="https://www.instagram.com/p/DXjwFjGkuM3/" target="_blank" rel="noopener">View on Instagram</a>
+        </blockquote>
+      </div>
+      <div class="embed-item">
+        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
+          data-instgrm-permalink="https://www.instagram.com/p/DXRNI2hEf9Y/"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+          <a href="https://www.instagram.com/p/DXRNI2hEf9Y/" target="_blank" rel="noopener">View on Instagram</a>
+        </blockquote>
+      </div>
+      <div class="embed-item">
+        <blockquote class="instagram-media" data-instgrm-captionhidden="1"
+          data-instgrm-permalink="https://www.instagram.com/p/DT8H8IBCMv-/"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:0;padding:0;width:100%">
+          <a href="https://www.instagram.com/p/DT8H8IBCMv-/" target="_blank" rel="noopener">View on Instagram</a>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-label">@THATROAMFLUENCER</div>
+      <div class="about-main"></div>
+      <div class="about-float"></div>
+    </div>
+    <div class="about-text">
+      <div class="section-tag reveal">About</div>
+      <h2 class="section-title reveal">She Roams.<br><em>She Creates.</em><br>She Inspires.</h2>
+      <p class="reveal">A globe-trotting content creator at the intersection of travel, high-end hospitality, and fashion — turning destinations into visual stories that move people to book their next flight.</p>
+      <p class="reveal d1">With a signature warm, cinematic aesthetic and an eye for the extraordinary in the everyday, every frame is crafted to make your brand feel like an experience worth having.</p>
+      <p class="reveal d2">Trusted by luxury resorts, fashion houses, and lifestyle brands across four continents to bring their stories to life with authenticity and artistry.</p>
+      <div class="pillars reveal d3">
+        <span class="pill">Luxury Travel</span>
+        <span class="pill">Hotel Stays</span>
+        <span class="pill">Fashion Editorials</span>
+        <span class="pill">Destination Reels</span>
+        <span class="pill">Brand Campaigns</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="work-bg">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <div class="section-tag reveal">Services</div>
+      <h2 class="section-title reveal">What I <em>Offer</em></h2>
+    </div>
+    <a href="#contact" class="btn-outline reveal" style="margin-bottom:1rem;">See Packages →</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="svc-num">01</div>
+      <div class="svc-title">Travel Content Creation</div>
+      <div class="svc-desc">Full-scope destination storytelling — from in-flight to arrival. Photo, Reel, and story content crafted to inspire wanderlust and drive engagement.</div>
+      <div class="svc-tags"><span class="svc-tag">Reels</span><span class="svc-tag">Photography</span><span class="svc-tag">Stories</span><span class="svc-tag">Blog</span></div>
+    </div>
+    <div class="service-card reveal d1">
+      <div class="svc-num">02</div>
+      <div class="svc-title">Hotel &amp; Resort Reviews</div>
+      <div class="svc-desc">Immersive hospitality content that showcases your property through genuine experience. Room tours, amenity highlights, and ambient storytelling at its finest.</div>
+      <div class="svc-tags"><span class="svc-tag">Room Tours</span><span class="svc-tag">Dining</span><span class="svc-tag">Spa</span><span class="svc-tag">Reviews</span></div>
+    </div>
+    <div class="service-card reveal d2">
+      <div class="svc-num">03</div>
+      <div class="svc-title">Fashion Editorials</div>
+      <div class="svc-desc">Location-driven fashion content that blends cultural context with style. Perfect for lookbooks, seasonal campaigns, and luxury brand storytelling.</div>
+      <div class="svc-tags"><span class="svc-tag">Lookbooks</span><span class="svc-tag">OOTDs</span><span class="svc-tag">Campaigns</span></div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-num">04</div>
+      <div class="svc-title">Brand Ambassadorship</div>
+      <div class="svc-desc">Long-term partnership for brands seeking sustained visibility, recurring content, and an authentic voice that your audience genuinely trusts.</div>
+      <div class="svc-tags"><span class="svc-tag">Monthly</span><span class="svc-tag">Quarterly</span><span class="svc-tag">Annual</span></div>
+    </div>
+    <div class="service-card reveal d1">
+      <div class="svc-num">05</div>
+      <div class="svc-title">Destination Guides</div>
+      <div class="svc-desc">Beautifully produced travel guides — video or blog format — that position your destination as unmissable. Tourism boards &amp; airlines welcome.</div>
+      <div class="svc-tags"><span class="svc-tag">Video</span><span class="svc-tag">Blog</span><span class="svc-tag">Itinerary</span></div>
+    </div>
+    <div class="service-card reveal d2">
+      <div class="svc-num">06</div>
+      <div class="svc-title">UGC &amp; Ad Creative</div>
+      <div class="svc-desc">High-converting, platform-native ad creative and user-generated content delivered as raw or edited files — ready to run on Meta, TikTok, and beyond.</div>
+      <div class="svc-tags"><span class="svc-tag">UGC</span><span class="svc-tag">Ads</span><span class="svc-tag">Raw Files</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Brands -->
+<div class="brands-bar">
+  <div class="brands-label">Trusted by leading brands worldwide</div>
+  <div style="overflow:hidden;">
+    <div class="brands-inner">
+      <span class="brand-name">Marriott</span><span class="brand-name">Six Senses</span>
+      <span class="brand-name">Chloé</span><span class="brand-name">Emirates</span>
+      <span class="brand-name">Airbnb Luxe</span><span class="brand-name">Reformation</span>
+      <span class="brand-name">Four Seasons</span><span class="brand-name">Net-a-Porter</span>
+      <span class="brand-name">Condé Nast</span><span class="brand-name">Vogue</span>
+      <!-- duplicate for loop -->
+      <span class="brand-name">Marriott</span><span class="brand-name">Six Senses</span>
+      <span class="brand-name">Chloé</span><span class="brand-name">Emirates</span>
+      <span class="brand-name">Airbnb Luxe</span><span class="brand-name">Reformation</span>
+      <span class="brand-name">Four Seasons</span><span class="brand-name">Net-a-Porter</span>
+      <span class="brand-name">Condé Nast</span><span class="brand-name">Vogue</span>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="section-tag reveal">Kind Words</div>
+  <h2 class="section-title reveal">What They <em>Say</em></h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-quote">"Working with her transformed how we present our property. The reel she created for us drove more bookings in two weeks than our entire previous campaign."</div>
+      <div class="testi-credit"><div class="credit-dot"></div><span class="credit-txt">Marketing Director, Gaasbas Co. — Nepal</span></div>
+    </div>
+    <div class="testi-card reveal d1">
+      <div class="testi-quote">"Her eye for light and location is unmatched. The fashion editorial she shot in Agra is exactly what our brand needed."</div>
+      <div class="testi-credit"><div class="credit-dot"></div><span class="credit-txt">Creative Director — Indian Independent Fashion Label</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section>
+  <div class="section-tag reveal">How It Works</div>
+  <h2 class="section-title reveal">From Idea to <em>Impact</em></h2>
+  <div class="process-steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <div class="step-title">Discovery Call</div>
+      <div class="step-desc">We align on your brand vision, goals, target audience, and creative direction. No brief is too bold.</div>
+    </div>
+    <div class="step reveal d1">
+      <div class="step-num">02</div>
+      <div class="step-title">Concept &amp; Planning</div>
+      <div class="step-desc">Moodboards, shot lists, location scouting, and a detailed content plan delivered within 3 business days.</div>
+    </div>
+    <div class="step reveal d2">
+      <div class="step-num">03</div>
+      <div class="step-title">Shoot &amp; Create</div>
+      <div class="step-desc">On-location production with full creative control, capturing every moment with intention and artistry.</div>
+    </div>
+    <div class="step reveal d3">
+      <div class="step-num">04</div>
+      <div class="step-title">Deliver &amp; Publish</div>
+      <div class="step-desc">Edited, on-brand deliverables with usage rights. Optional managed posting and performance reporting.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<div id="contact" class="contact-section">
+  <div class="contact-left">
+    <div class="section-tag">Let's Connect</div>
+    <h2 class="section-title">Start Your<br><em>Story</em></h2>
+    <p>Whether you're a luxury resort, fashion house, tourism board, or lifestyle brand — let's create content that takes your audience somewhere they've never been.</p>
+    <p>Response within 24 hours. No ghost-posting. Just real results.</p>
+    <div class="contact-details">
+      <div class="c-detail"><span class="c-label">Email</span><span class="c-val">thatroamfluencer@gmail.com</span></div>
+      <div class="c-detail"><span class="c-label">Instagram</span><span class="c-val">@thatroamfluencer</span></div>
+      <div class="c-detail"><span class="c-label">Based in</span><span class="c-val">Everywhere</span></div>
+    </div>
+  </div>
+  <div class="contact-right">
+    <div class="section-tag">Enquiry Form</div>
+    <div class="form-row">
+      <div class="form-field"><label>First Name</label><input type="text" placeholder="Your first name"></div>
+      <div class="form-field"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
+    </div>
+    <div class="form-field"><label>Brand / Company</label><input type="text" placeholder="Your brand"></div>
+    <div class="form-field"><label>Email</label><input type="email" placeholder="you@brand.com"></div>
+    <div class="form-field">
+      <label>Type of Collaboration</label>
+      <select>
+        <option value="">Select a service...</option>
+        <option>Travel Content Creation</option>
+        <option>Hotel / Resort Review</option>
+        <option>Fashion Editorial</option>
+        <option>Brand Ambassadorship</option>
+        <option>Destination Guide</option>
+        <option>UGC / Ad Creative</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-field"><label>Tell me about your project</label><textarea placeholder="Share your vision, timeline, and budget range..."></textarea></div>
+    <button class="submit-btn">Send Enquiry →</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">ThatRoamfluencer</div>
+  <div class="footer-copy">© 2025 ThatRoamfluencer. All rights reserved.</div>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/thatroamfluencer" class="social-link">Instagram</a>
+    <a href="#" class="social-link">YouTube</a>
+    <a href="#" class="social-link">WhatsApp</a>
+  </div>
+</footer>
+
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+  // Cursor
+  const cur = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function anim(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim);})();
+  document.querySelectorAll('a,button,.portfolio-item').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.width='14px';cur.style.height='14px';ring.style.width='55px';ring.style.height='55px';});
+    el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='34px';ring.style.height='34px';});
+  });
+  // Scroll nav
+  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+  // Reveal
+  const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  // Filters
+  document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',function(){document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}}));
+</script>
+</body>
+</html>
