@@ -326,6 +326,44 @@
   .badge-stat { font-size:.57rem;letter-spacing:.04em;color:var(--muted); }
   .badge-dot { width:5px;height:5px;background:var(--rose);border-radius:50%;flex-shrink:0; }
 
+  /* ── Portfolio engagement badges ── */
+  .p-eng-badge {
+    position:absolute; top:.75rem; right:.75rem; z-index:4;
+    display:flex; flex-direction:column; align-items:flex-end; gap:.3rem;
+    opacity:0; transform:translateY(-4px); transition:opacity .3s, transform .3s;
+  }
+  .portfolio-item:hover .p-eng-badge { opacity:1; transform:translateY(0); }
+  .p-eng-pill {
+    display:flex; align-items:center; gap:.35rem;
+    background:rgba(42,21,32,.78); backdrop-filter:blur(8px);
+    padding:.3rem .6rem; border-radius:2rem;
+    font-size:.58rem; letter-spacing:.08em; color:#fff; white-space:nowrap;
+  }
+  .p-eng-pill .dot { width:5px; height:5px; border-radius:50%; background:var(--rose); flex-shrink:0; }
+  .p-eng-pill.top { background:rgba(245,158,11,.88); }
+  .p-eng-pill.top .dot { background:#fff; }
+
+  /* skeleton loading cards */
+  .p-skeleton { position:relative; overflow:hidden; grid-column:span 4; }
+  .p-skeleton .p-img {
+    background:linear-gradient(90deg,#f0e0e8 25%,#f8edf2 50%,#f0e0e8 75%);
+    background-size:200% 100%;
+    animation:shimmer 1.4s infinite;
+  }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+  /* live data badge on section */
+  .live-badge {
+    display:inline-flex; align-items:center; gap:.4rem;
+    font-size:.6rem; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--rose); margin-left:1.2rem; vertical-align:middle;
+  }
+  .live-dot {
+    width:6px; height:6px; border-radius:50%; background:var(--rose);
+    animation:livePulse 1.5s ease-in-out infinite;
+  }
+  @keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
   /* ── About section real image ── */
   .about-main { overflow:hidden; }
   .about-main img {
@@ -461,7 +499,7 @@
 <!-- Work -->
 <section id="work" class="work-bg">
   <div class="section-tag reveal">Selected Work</div>
-  <h2 class="section-title reveal">Stories That <em>Travel</em> With You</h2>
+  <h2 class="section-title reveal">Stories That <em>Travel</em> With You <span class="live-badge" id="liveBadge" style="display:none"><span class="live-dot"></span>Live Data</span></h2>
 
   <div class="portfolio-filters reveal">
     <button class="filter-btn active" data-filter="all">All</button>
@@ -471,55 +509,14 @@
     <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
   </div>
 
-  <div class="portfolio-grid">
-    <a href="https://www.instagram.com/p/CbIG4m9PfcU/" target="_blank" rel="noopener" class="portfolio-item" data-cat="fashion">
-      <div class="p-img"><img src="images/CbIG4m9PfcU.jpg" alt="The Power I Hold"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
-      <div class="portfolio-overlay">
-        <div class="p-cat">Fashion · Lifestyle</div>
-        <div class="p-name">The Power I Hold</div>
-        <div class="p-loc">Beach Sunset</div>
-      </div>
-    </a>
-    <a href="https://www.instagram.com/p/DXbrAsLiADF/" target="_blank" rel="noopener" class="portfolio-item" data-cat="travel">
-      <div class="p-img"><img src="images/DXbrAsLiADF.jpg" alt="Nepal Itinerary"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
-      <div class="portfolio-overlay">
-        <div class="p-cat">Travel Guide</div>
-        <div class="p-name">Nepal Itinerary</div>
-        <div class="p-loc">Nepal</div>
-      </div>
-    </a>
-    <a href="https://www.instagram.com/p/DT4cSl-iLZL/" target="_blank" rel="noopener" class="portfolio-item" data-cat="fashion">
-      <div class="p-img"><img src="images/DT4cSl-iLZL.jpg" alt="Finns Beach Club"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
-      <div class="portfolio-overlay">
-        <div class="p-cat">Fashion · Lifestyle</div>
-        <div class="p-name">Finns Beach Club</div>
-        <div class="p-loc">Bali, Indonesia</div>
-      </div>
-    </a>
-    <a href="https://www.instagram.com/p/DUoCPWFCNeO/" target="_blank" rel="noopener" class="portfolio-item" data-cat="hospitality">
-      <div class="p-img"><img src="images/DUoCPWFCNeO.jpg" alt="KL You Have My Heart"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
-      <div class="portfolio-overlay">
-        <div class="p-cat">Hospitality · Travel</div>
-        <div class="p-name">KL, You Have My Heart</div>
-        <div class="p-loc">Kuala Lumpur, Malaysia</div>
-      </div>
-    </a>
-    <a href="https://www.instagram.com/p/DTae3_DiHjv/" target="_blank" rel="noopener" class="portfolio-item" data-cat="lifestyle">
-      <div class="p-img"><img src="images/DTae3_DiHjv.jpg" alt="Un-bali-evable, Ubud"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
-      <div class="portfolio-overlay">
-        <div class="p-cat">Lifestyle · Travel</div>
-        <div class="p-name">Un-Bali-Evable</div>
-        <div class="p-loc">Ubud, Bali</div>
-      </div>
-    </a>
-    <a href="https://www.instagram.com/p/DG3AnKWumGy/" target="_blank" rel="noopener" class="portfolio-item" data-cat="lifestyle">
-      <div class="p-img"><img src="images/DG3AnKWumGy.jpg" alt="Full Moon Party, Koh Phangan"><div class="ping-wrap"><div class="ping-dot"></div></div></div>
-      <div class="portfolio-overlay">
-        <div class="p-cat">Lifestyle</div>
-        <div class="p-name">Full Moon Party</div>
-        <div class="p-loc">Koh Phangan, Thailand</div>
-      </div>
-    </a>
+  <div class="portfolio-grid" id="portfolioGrid">
+    <!-- skeleton placeholders while insights load -->
+    <div class="p-skeleton"><div class="p-img" style="aspect-ratio:4/5"></div></div>
+    <div class="p-skeleton"><div class="p-img" style="aspect-ratio:4/5"></div></div>
+    <div class="p-skeleton"><div class="p-img" style="aspect-ratio:4/5"></div></div>
+    <div class="p-skeleton"><div class="p-img" style="aspect-ratio:4/5"></div></div>
+    <div class="p-skeleton"><div class="p-img" style="aspect-ratio:4/5"></div></div>
+    <div class="p-skeleton"><div class="p-img" style="aspect-ratio:4/5"></div></div>
   </div>
 
   <!-- Reels -->
@@ -869,6 +866,111 @@
       card.classList.remove('playing');
     });
   });
+
+  // ── Dynamic portfolio grid from insights ──
+  (async function loadPortfolio() {
+    const INSIGHTS_URL = 'https://instainsightsdashboard.vercel.app/api/insights';
+    const grid = document.getElementById('portfolioGrid');
+    const fmt = n => n >= 1000 ? (n/1000).toFixed(1)+'K' : String(n);
+
+    function guessCategory(caption) {
+      const c = (caption||'').toLowerCase();
+      if (/hotel|resort|stay|hospitality|property|checkin|check.in/.test(c)) return 'hospitality';
+      if (/outfit|dress|fashion|style|ootd|grwm|wear|look/.test(c)) return 'fashion';
+      if (/travel|trip|itinerary|guide|explore|destination|visit|tour|fly|flight/.test(c)) return 'travel';
+      return 'lifestyle';
+    }
+
+    function guessLocation(caption) {
+      const locs = [
+        ['bali','Bali, Indonesia'],['ubud','Ubud, Bali'],['nepal','Nepal'],
+        ['kathmandu','Kathmandu'],['malaysia','Malaysia'],['kuala lumpur','Kuala Lumpur'],
+        ['kl','Kuala Lumpur'],['thailand','Thailand'],['koh phangan','Koh Phangan'],
+        ['udaipur','Udaipur, India'],['maldives','Maldives'],['goa','Goa, India'],
+        ['dubai','Dubai'],['singapore','Singapore'],['vietnam','Vietnam'],
+      ];
+      const c = (caption||'').toLowerCase();
+      for (const [k,v] of locs) if (c.includes(k)) return v;
+      return 'Instagram';
+    }
+
+    function guessTitle(caption) {
+      const firstLine = (caption||'').split(/[\n.!?]/)[0].trim();
+      return firstLine.length > 2 && firstLine.length < 50 ? firstLine : 'Top Post';
+    }
+
+    function buildCard(p, rank) {
+      const cat = guessCategory(p.caption);
+      const loc = guessLocation(p.caption);
+      const title = guessTitle(p.caption);
+      const isTop = rank === 0;
+      const imgSrc = p.thumbnail || '';
+
+      return `
+      <a href="https://www.instagram.com/p/${p.shortcode}/" target="_blank" rel="noopener"
+         class="portfolio-item reveal" data-cat="${cat}" style="grid-column:span 4">
+        <div class="p-img">
+          <img src="${imgSrc}" alt="${title}" loading="lazy"
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center">
+          <div class="ping-wrap"><div class="ping-dot"></div></div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="p-cat">${cat.charAt(0).toUpperCase()+cat.slice(1)}</div>
+          <div class="p-name">${title}</div>
+          <div class="p-loc">${loc}</div>
+        </div>
+        <div class="p-eng-badge">
+          ${isTop ? '<div class="p-eng-pill top"><span class="dot"></span>🏆 Top Post</div>' : ''}
+          <div class="p-eng-pill"><span class="dot"></span>${p.engagement_rate}% eng. rate</div>
+          <div class="p-eng-pill"><span class="dot"></span>${fmt(p.reach)} reach</div>
+          ${p.saves > 0 ? `<div class="p-eng-pill"><span class="dot"></span>${fmt(p.saves)} saves</div>` : ''}
+        </div>
+      </a>`;
+    }
+
+    try {
+      const res = await fetch(INSIGHTS_URL);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      // Top 6 by engagement rate (must have real reach data)
+      const top6 = data.posts
+        .filter(p => p.reach > 100 && p.engagement_rate > 0)
+        .sort((a,b) => b.engagement_rate - a.engagement_rate)
+        .slice(0, 6);
+
+      if (!top6.length) return; // keep skeleton/fallback
+
+      grid.innerHTML = top6.map((p, i) => buildCard(p, i)).join('');
+
+      // Show live badge
+      document.getElementById('liveBadge').style.display = 'inline-flex';
+
+      // Re-observe reveal animations for new cards
+      const revObs = new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:.1});
+      grid.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+      // Re-wire filters for new dynamic cards
+      document.querySelectorAll('.filter-btn').forEach(b=>{
+        b.onclick = function() {
+          document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+          this.classList.add('active');
+          const cat = this.dataset.filter;
+          document.querySelectorAll('.portfolio-item').forEach(item=>{
+            const match = cat==='all' || item.dataset.cat===cat;
+            item.style.opacity = match ? '1' : '.25';
+            item.style.pointerEvents = match ? 'auto' : 'none';
+            item.style.transform = match ? 'scale(1)' : 'scale(.97)';
+            item.style.transition = 'opacity .4s,transform .4s';
+          });
+        };
+      });
+
+    } catch(e) {
+      // Silently fall back — skeletons remain, no broken UI
+      console.warn('Portfolio insights unavailable:', e.message);
+    }
+  })();
 
   // ── Featured strip autoplay (fallback: play on scroll into view) ──
   const frVideo=document.querySelector('.fr-video');
