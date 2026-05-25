@@ -918,6 +918,7 @@
   (async function loadPortfolio() {
     const INSIGHTS_URL = 'https://instainsightsdashboard.vercel.app/api/insights';
     const fmt = n => n >= 1000 ? (n/1000).toFixed(1)+'K' : String(n);
+    const fmtOrDash = n => (n > 0) ? fmt(n) : '–';
 
     try {
       const res = await fetch(INSIGHTS_URL);
@@ -938,10 +939,10 @@
         if (!p || !badge) return;
 
         badge.innerHTML = `
-          <div class="p-eng-pill"><span class="dot"></span>👁 ${fmt(p.reach)} reach</div>
-          <div class="p-eng-pill"><span class="dot"></span>❤️ ${fmt(p.likes)} likes</div>
-          <div class="p-eng-pill"><span class="dot"></span>🔖 ${fmt(p.saves)} saves</div>
-          <div class="p-eng-pill"><span class="dot"></span>↗️ ${fmt(p.shares)} shares</div>`;
+          <div class="p-eng-pill"><span class="dot"></span>👁 ${fmtOrDash(p.reach)} reach</div>
+          <div class="p-eng-pill"><span class="dot"></span>❤️ ${fmtOrDash(p.likes)} likes</div>
+          <div class="p-eng-pill"><span class="dot"></span>🔖 ${fmtOrDash(p.saves)} saves</div>
+          <div class="p-eng-pill"><span class="dot"></span>↗️ ${fmtOrDash(p.shares)} shares</div>`;
       });
 
       // Show live badge
