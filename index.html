@@ -921,9 +921,9 @@
         </div>
         <div class="p-eng-badge">
           ${isTop ? '<div class="p-eng-pill top"><span class="dot"></span>🏆 Top Post</div>' : ''}
-          <div class="p-eng-pill"><span class="dot"></span>${p.engagement_rate}% eng. rate</div>
+          <div class="p-eng-pill"><span class="dot"></span>${fmt(p.total_interactions)} interactions</div>
+          <div class="p-eng-pill"><span class="dot"></span>${fmt(p.likes)} likes · ${fmt(p.saves)} saves</div>
           <div class="p-eng-pill"><span class="dot"></span>${fmt(p.reach)} reach</div>
-          ${p.saves > 0 ? `<div class="p-eng-pill"><span class="dot"></span>${fmt(p.saves)} saves</div>` : ''}
         </div>
       </a>`;
     }
@@ -933,10 +933,10 @@
       const data = await res.json();
       if (data.error) throw new Error(data.error);
 
-      // Top 6 by engagement rate (must have real reach data)
+      // Top 6 by total interactions (absolute engagement numbers, active posts only)
       const top6 = data.posts
-        .filter(p => p.reach > 100 && p.engagement_rate > 0)
-        .sort((a,b) => b.engagement_rate - a.engagement_rate)
+        .filter(p => p.total_interactions > 0 && p.reach > 0)
+        .sort((a,b) => b.total_interactions - a.total_interactions)
         .slice(0, 6);
 
       if (!top6.length) return; // keep skeleton/fallback
