@@ -773,9 +773,9 @@
       <div class="ig-kpi-sub">gained this period</div>
     </div>
     <div class="ig-kpi b">
-      <span class="ig-kpi-label">Profile Views</span>
-      <div class="ig-kpi-value" id="igProfileViews">—</div>
-      <div class="ig-kpi-sub">visits to your profile</div>
+      <span class="ig-kpi-label">Total Followers</span>
+      <div class="ig-kpi-value" id="igTotalFollowers">—</div>
+      <div class="ig-kpi-sub">current audience size</div>
     </div>
     <div class="ig-kpi a">
       <span class="ig-kpi-label">Avg. Engagement</span>
@@ -967,17 +967,16 @@
 
       const reach28   = sum(slice(data.accountSeries.reach));
       const follow28  = sum(slice(data.accountSeries.follower_count));
-      const views28   = sum(slice(data.accountSeries.profile_views));
 
       const validPosts = (data.posts || []).filter(p => p.reach > 0);
       const avgEng = validPosts.length
         ? (validPosts.reduce((a, b) => a + b.engagement_rate, 0) / validPosts.length).toFixed(1)
         : '—';
 
-      document.getElementById('igReach').textContent        = fmt(reach28);
-      document.getElementById('igFollowers').textContent    = fmt(follow28);
-      document.getElementById('igProfileViews').textContent = fmt(views28);
-      document.getElementById('igEngRate').textContent      = avgEng + '%';
+      document.getElementById('igReach').textContent          = fmt(reach28);
+      document.getElementById('igFollowers').textContent      = fmt(follow28);
+      document.getElementById('igTotalFollowers').textContent = fmt(data.profile?.followers_count || 0);
+      document.getElementById('igEngRate').textContent        = avgEng + '%';
       document.getElementById('liveBadge2').style.display   = 'inline-flex';
 
       // Show live badge
