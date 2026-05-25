@@ -212,12 +212,19 @@
   .svc-tags { display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.3rem; }
   .svc-tag { font-size:.57rem;letter-spacing:.15em;text-transform:uppercase;color:var(--rose);border:1px solid var(--light-border);padding:.3rem .7rem; }
 
-  /* Brands ticker */
-  .brands-bar { border-top:1px solid var(--light-border);border-bottom:1px solid var(--light-border);padding:3rem 4rem;text-align:center;overflow:hidden; }
-  .brands-label { font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem; }
-  .brands-inner { display:flex;gap:4rem;animation:scroll 22s linear infinite;white-space:nowrap;align-items:center; }
-  @keyframes scroll { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
-  .brand-name { font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.12em;color:rgba(180,100,130,.35);text-transform:uppercase; }
+  /* Instagram KPI bar */
+  .ig-stats-bar { border-top:1px solid var(--light-border);border-bottom:1px solid var(--light-border);padding:3.5rem 4rem;background:#fdf8f9; }
+  .ig-stats-label { font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:2.5rem; }
+  .ig-stats-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:960px;margin:0 auto; }
+  .ig-kpi { background:#fff;border:1px solid var(--light-border);border-top:3px solid var(--rose);padding:1.6rem 1.4rem;text-align:center;transition:box-shadow .3s; }
+  .ig-kpi:hover { box-shadow:0 6px 24px rgba(232,114,143,.1); }
+  .ig-kpi.g { border-top-color:#7ec8a0; }
+  .ig-kpi.b { border-top-color:#89b4d4; }
+  .ig-kpi.a { border-top-color:#d4a96a; }
+  .ig-kpi-label { font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.7rem; }
+  .ig-kpi-value { font-size:2.1rem;font-weight:600;color:var(--ink);line-height:1; }
+  .ig-kpi-sub { font-size:.6rem;color:var(--muted);margin-top:.45rem;letter-spacing:.04em; }
+  @media(max-width:700px){ .ig-stats-grid{grid-template-columns:repeat(2,1fr);} .ig-stats-bar{padding:2.5rem 2rem;} }
 
   /* Testimonials */
   .testimonials { background:var(--soft); }
@@ -751,22 +758,29 @@
   </div>
 </section>
 
-<!-- Brands -->
-<div class="brands-bar">
-  <div class="brands-label">Trusted by leading brands worldwide</div>
-  <div style="overflow:hidden;">
-    <div class="brands-inner">
-      <span class="brand-name">Marriott</span><span class="brand-name">Six Senses</span>
-      <span class="brand-name">Chloé</span><span class="brand-name">Emirates</span>
-      <span class="brand-name">Airbnb Luxe</span><span class="brand-name">Reformation</span>
-      <span class="brand-name">Four Seasons</span><span class="brand-name">Net-a-Porter</span>
-      <span class="brand-name">Condé Nast</span><span class="brand-name">Vogue</span>
-      <!-- duplicate for loop -->
-      <span class="brand-name">Marriott</span><span class="brand-name">Six Senses</span>
-      <span class="brand-name">Chloé</span><span class="brand-name">Emirates</span>
-      <span class="brand-name">Airbnb Luxe</span><span class="brand-name">Reformation</span>
-      <span class="brand-name">Four Seasons</span><span class="brand-name">Net-a-Porter</span>
-      <span class="brand-name">Condé Nast</span><span class="brand-name">Vogue</span>
+<!-- Instagram KPIs -->
+<div class="ig-stats-bar">
+  <div class="ig-stats-label">Instagram · Last 28 Days <span id="liveBadge2" class="live-badge" style="display:none"><span class="live-dot"></span>live</span></div>
+  <div class="ig-stats-grid">
+    <div class="ig-kpi">
+      <span class="ig-kpi-label">Total Reach</span>
+      <div class="ig-kpi-value" id="igReach">—</div>
+      <div class="ig-kpi-sub">unique accounts reached</div>
+    </div>
+    <div class="ig-kpi g">
+      <span class="ig-kpi-label">New Followers</span>
+      <div class="ig-kpi-value" id="igFollowers">—</div>
+      <div class="ig-kpi-sub">gained this period</div>
+    </div>
+    <div class="ig-kpi b">
+      <span class="ig-kpi-label">Profile Views</span>
+      <div class="ig-kpi-value" id="igProfileViews">—</div>
+      <div class="ig-kpi-sub">visits to your profile</div>
+    </div>
+    <div class="ig-kpi a">
+      <span class="ig-kpi-label">Avg. Engagement</span>
+      <div class="ig-kpi-value" id="igEngRate">—</div>
+      <div class="ig-kpi-sub">across recent posts</div>
     </div>
   </div>
 </div>
@@ -944,6 +958,27 @@
           <div class="p-eng-pill"><span class="dot"></span>🔖 ${fmtOrDash(p.saves)} saves</div>
           <div class="p-eng-pill"><span class="dot"></span>↗️ ${fmtOrDash(p.shares)} shares</div>`;
       });
+
+      // ── Populate KPI stat cards (last 28 days) ──
+      const DAYS = 28;
+      const cutoff = Date.now() - DAYS * 86400 * 1000;
+      const slice = (arr) => (arr || []).filter(v => new Date(v.end_time).getTime() >= cutoff);
+      const sum   = (arr) => arr.reduce((a, b) => a + (b.value || 0), 0);
+
+      const reach28   = sum(slice(data.accountSeries.reach));
+      const follow28  = sum(slice(data.accountSeries.follower_count));
+      const views28   = sum(slice(data.accountSeries.profile_views));
+
+      const validPosts = (data.posts || []).filter(p => p.reach > 0);
+      const avgEng = validPosts.length
+        ? (validPosts.reduce((a, b) => a + b.engagement_rate, 0) / validPosts.length).toFixed(1)
+        : '—';
+
+      document.getElementById('igReach').textContent        = fmt(reach28);
+      document.getElementById('igFollowers').textContent    = fmt(follow28);
+      document.getElementById('igProfileViews').textContent = fmt(views28);
+      document.getElementById('igEngRate').textContent      = avgEng + '%';
+      document.getElementById('liveBadge2').style.display   = 'inline-flex';
 
       // Show live badge
       document.getElementById('liveBadge').style.display = 'inline-flex';
